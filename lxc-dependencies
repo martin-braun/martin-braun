@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+function require() {
+	dpkg -l "$1" | grep -q ^ii && return 1
+	echo "> Installing $@ ..."
+	apt install "$@" -y
+	. "$HOME/.bashrc"
+	return 0
+}
+
+trap 'echo "[$] $BASH_COMMAND"' DEBUG && set -e
+
+apt update
+
+# mbx
+require git
+if command -v "mbx-version" >/dev/null 2>&1; then
+	mkdir -p /usr/local/mbx
+	git clone --depth 1 https://github.com/martin-braun/mbx-toolbox.git /usr/local/mbx
+	echo '' >> $HOME/.bashrc
+	echo 'export PATH=$PATH:/usr/local/mbx/bin/deb:/usr/local/mbx/bin' >> $HOME/.bashrc
+	echo "test -e /usr/local/mbx/lib/init.bash && . /usr/local/mbx/lib/init.bash" >> $HOME/.bashrc
+	. "$HOME/.bashrc"
+fi
+. "$MBX_LIBPATH/_.bash"
+
+# nvm
+if ! test-command nvm; then
+	require curl
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+	source $HOME/.bashrc
+	nvm install 18
+fi
+
+# node
+node_version=18
+if [ $(node -v | tr "." "\n" | head -1 2>&1) != "v18"]
+	nvm install $node_version
+	nvm alias default $node_version
+fi
+
+# pm2
+if ! test-command pm2; then
+	npm i pm2 -g
+fi
+
+trap - DEBUG && echo "[o] Done!"

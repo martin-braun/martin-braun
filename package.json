@@ -1,0 +1,19 @@
+{
+  "name": "martin-braun",
+  "version": "0.0.1",
+  "description": "Website of martin-braun.net",
+  "main": "app.js",
+  "scripts": {
+    "start": "serve -s -L -n public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martin-braun/martin-braun.git"
+  },
+  "author": "martin-braun",
+  "license": "ISC",
+  "homepage": "https://github.com/martin-braun/martin-braun#readme",
+  "devDependencies": {
+    "serve": "^14.1.2"
+  }
+}
