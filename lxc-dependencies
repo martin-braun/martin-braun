@@ -2,7 +2,6 @@
 
 function require() {
 	dpkg -l "$1" | grep -q ^ii && return 1
-	echo "> Installing $@ ..."
 	apt install "$@" -y
 	. "$HOME/.bashrc"
 	return 0
@@ -24,17 +23,15 @@ if command -v "mbx-version" >/dev/null 2>&1; then
 fi
 . "$MBX_LIBPATH/_.bash"
 
-# nvm
+# nvm / node
+node_version=18
 if ! test-command nvm; then
 	require curl
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
 	source $HOME/.bashrc
-	nvm install 18
-fi
-
-# node
-node_version=18
-if [ $(node -v | tr "." "\n" | head -1 2>&1) != "v18"]
+	nvm install $node_version
+	nvm alias default $node_version
+elif [ $(node -v | tr "." "\n" | head -1 2>&1) != "v$node_version"]
 	nvm install $node_version
 	nvm alias default $node_version
 fi
@@ -45,3 +42,4 @@ if ! test-command pm2; then
 fi
 
 trap - DEBUG && echo "[o] Done!"
+
