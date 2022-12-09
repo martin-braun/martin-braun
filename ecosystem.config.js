@@ -13,7 +13,7 @@ module.exports = {
     production : {
       user : 'root',
       host : 'mb',
-      repo : 'git@github.com/martin-braun/martin-braun.git',
+      repo : 'https://github.com/martin-braun/martin-braun.git',
       ref  : 'origin/master',
       path : '/var/node/martin-braun.net',
       'pre-setup': '',

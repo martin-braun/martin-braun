@@ -13,7 +13,7 @@
   },
   "author": "martin-braun",
   "license": "ISC",
-  "homepage": "https://github.com/martin-braun/martin-braun#readme",
+  "homepage": "https://martin-braun.net",
   "devDependencies": {
     "serve": "^14.1.2"
   }
