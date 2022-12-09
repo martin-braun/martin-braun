@@ -13,12 +13,14 @@ module.exports = {
     production : {
       user : 'root',
       host : 'mb',
+      repo : 'git@github.com/martin-braun/martin-braun.git',
       ref  : 'origin/master',
-      repo : 'git+https://github.com/martin-braun/martin-braun.git',
       path : '/var/node/martin-braun.net',
+      'pre-setup': '',
+      'post-setup': '',
       'pre-deploy-local': '',
-      'post-deploy' : './lxc-dependencies && npm i && pm2 reload ecosystem.config.js --env production',
-      'pre-setup': ''
+      'pre-deploy': '',
+      'post-deploy': 'npm i && pm2 startOrReload --env production',
     }
   }
 };
