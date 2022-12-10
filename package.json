@@ -4,8 +4,7 @@
   "description": "Website of martin-braun.net",
   "main": "app.js",
   "scripts": {
-    "start": "serve -L -n public",
-    "daemon": "pm2 start"
+    "start": "serve -L -n public"
   },
   "repository": {
     "type": "git",

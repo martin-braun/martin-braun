@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 function require() {
-	dpkg -l "$1" | grep -q ^ii && return 1
-	apt install "$@" -y
-	. "$HOME/.bashrc"
-	return 0
+	if ! dpkg -l "$1" | grep -q ^ii; then
+		apt install "$@" -y
+		. "$HOME/.bashrc"
+	fi
 }
 
 trap 'echo "[$] $BASH_COMMAND"' DEBUG && set -e
