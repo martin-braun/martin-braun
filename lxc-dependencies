@@ -31,7 +31,7 @@ if ! test-command nvm; then
 	source $HOME/.bashrc
 	nvm install $node_version
 	nvm alias default $node_version
-elif [ $(node -v | tr "." "\n" | head -1 2>&1) != "v$node_version"]
+elif [ $(node -v | tr "." "\n" | head -1 2>&1) != "v$node_version"]; then
 	nvm install $node_version
 	nvm alias default $node_version
 fi
