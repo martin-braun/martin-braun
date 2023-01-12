@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+
+phpversion=7.4
+
+\. /dev/stdin <<< "$(wget -qO- https://raw.githubusercontent.com/lxc-compose/scripts/master/init)"
+lxcreq env/debian
+lxcreq lib/common
+lxcreq rust
+
+set -e
+
